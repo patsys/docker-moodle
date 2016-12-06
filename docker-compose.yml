@@ -1,0 +1,39 @@
+version: '2'
+services:
+  web:
+    image: patsys/moodle
+    environment:
+      - MOODLE_HTDOCS=/app/www/localhost/htdocs
+      - MOODLE_URL=http://moodle.local:32799
+      - MOODLE_LANG=de
+      - MOODLE_DB_TYPE=mariadb
+      - MOODLE_DB_HOST=db
+      - MOODLE_DB_NAME=moodle
+      - MOODLE_DB_USER=moodle
+      - MOODLE_DB_PASSWORD=T3stT3st
+      - MOODLE_SITE_FULLNAME=patsys
+      - MOODLE_SITE_SHORTNAME=PATSYS
+      - MOODLE_ADMIN_USER=admin
+      - MOODLE_ADMIN_PASSWORD=T3stT3st!
+      - MOODLE_ADMIN_EMAIL=my@th-bingen.de
+    links:
+      - db
+    expose:
+      - "80"
+    ports:
+      - "32799:80"
+    volumes:
+      - /docker/storage/moodle/www:/app
+  db:
+    image: patsys/mariadb
+    environment:
+      - MYSQL_DATABASE=moodle
+      - MYSQL_USER=moodle
+      - MYSQL_PASSWORD=T3stT3st
+      - MYSQL_ROOT_PASSWORD=T3stT3st
+      - MYSQL_HOST=172.%.%.%
+      - MYSQL_ROOT_HOST=172.%.%.%
+    expose:
+      - "3306"
+    volumes:
+      -  /docker/storage/moodle/db:/var/lib/mysql
