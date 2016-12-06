@@ -39,6 +39,6 @@ services:
     environment:
       - HOST=http://moodle
       - WORD=logged
-      - INTERVAL=5
-      - TRY=60
+      - INTERVAL=10
+      - TRY=70
 
