@@ -7,6 +7,7 @@ if [ ! -f "$file" ] || [ `wc -c <"$file"` -le 100 ]; then
   ln -s . moodle
   tar  -xzf *moodle*.tgz moodle
   rm moodle
+  rm *moodle*.tgz 
   /utils/exist_moodle_update.sh
   mkdir -p ../moodledata && chown apache:apache ../moodledata
   chown -R apache:apache .
