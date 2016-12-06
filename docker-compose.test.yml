@@ -40,8 +40,8 @@ services:
       -  /docker/storage/moodle/db:/var/lib/mysql
   sut:
     image: patsys/test-webserver
-    depends_on:
-      - apache
+    links:
+      - moodle
     environment:
       - HOST=http://moodle:32799
       - WORD=Log in
