@@ -5,7 +5,7 @@ services:
     image: patsys/moodle
     environment:
       - MOODLE_HTDOCS=/app/www/localhost/htdocs
-      - MOODLE_URL=moodle:32799
+      - MOODLE_URL=http://moodle
       - MOODLE_LANG=de
       - MOODLE_DB_TYPE=mariadb
       - MOODLE_DB_HOST=db
@@ -21,10 +21,6 @@ services:
       - db
     expose:
       - "80"
-    ports:
-      - "32799:80"
-    volumes:
-      - /docker/storage/moodle/www:/app
   db:
     image: patsys/mariadb
     environment:
@@ -36,15 +32,13 @@ services:
       - MYSQL_ROOT_HOST=172.%.%.%
     expose:
       - "3306"
-    volumes:
-      -  /docker/storage/moodle/db:/var/lib/mysql
   sut:
     image: patsys/test-webserver
     links:
       - moodle
     environment:
-      - HOST=http://moodle:32799
-      - WORD=Log in
+      - HOST=http://moodle
+      - WORD=logged
       - INTERVAL=5
       - TRY=60
 
